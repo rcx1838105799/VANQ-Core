@@ -39,6 +39,14 @@ class BrandHeader extends StatelessWidget {
                       'assets/images/vanq-logo-anime.webp',
                       width: _logoSize - 12,
                       height: _logoSize - 12,
+                      errorBuilder: (context, error, stackTrace) => const Text(
+                        'V',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
