@@ -19,8 +19,8 @@ use tokio::signal::unix::{signal, SignalKind};
 use tokio::time::Sleep;
 use tokio_stream::Stream;
 
-const SERVICE_NAME: &str = "flclash-helper";
-const UNIT_PATH: &str = "/etc/systemd/system/flclash-helper.service";
+const SERVICE_NAME: &str = "vanqcore-helper";
+const UNIT_PATH: &str = "/etc/systemd/system/vanqcore-helper.service";
 const RUNTIME_DIR_NAME: &str = "flclash";
 const SOCKET_PATH: &str = "/run/flclash/helper.sock";
 const OWNER_UID_ENV: &str = "FLCLASH_HELPER_OWNER_UID";

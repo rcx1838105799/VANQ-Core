@@ -133,6 +133,12 @@ void main() {
     test('handles missing minor/patch', () {
       expect(compareVersions('1', '1.0.0'), 0);
     });
+
+    test('tolerates pre-release suffixes', () {
+      expect(compareVersions('0.9.0-vanq2', '0.9.0'), 0);
+      expect(compareVersions('0.9.1-vanq1', '0.9.0'), greaterThan(0));
+      expect(compareVersions('0.9.0-vanq1', '0.9.1'), lessThan(0));
+    });
   });
 
   group('getViewMode', () {
