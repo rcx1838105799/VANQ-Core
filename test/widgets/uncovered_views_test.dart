@@ -200,7 +200,9 @@ void main() {
     await tester.pump();
 
     expect(find.byType(AboutView), findsOneWidget);
-    expect(find.text('Telegram'), findsOneWidget);
+    // VANQ Core rebrand: Telegram entry removed from AboutView until an
+    // official channel exists.
+    expect(find.text('Telegram'), findsNothing);
     final hero = find.byWidgetPredicate(
       (widget) => widget.runtimeType.toString() == '_AboutHero',
     );
