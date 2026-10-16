@@ -940,6 +940,136 @@ class AppLocalizations {
     );
   }
 
+  /// `Fast as sakura, steady as stars`
+  String get vanqTagline {
+    return Intl.message(
+      'Fast as sakura, steady as stars',
+      name: 'vanqTagline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signed in successfully`
+  String get vanqSignInSuccess {
+    return Intl.message(
+      'Signed in successfully',
+      name: 'vanqSignInSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh`
+  String get vanqRefresh {
+    return Intl.message('Refresh', name: 'vanqRefresh', desc: '', args: []);
+  }
+
+  /// `Sign out`
+  String get vanqSignOut {
+    return Intl.message('Sign out', name: 'vanqSignOut', desc: '', args: []);
+  }
+
+  /// `Expires {date}`
+  String vanqExpiresOn(Object date) {
+    return Intl.message(
+      'Expires $date',
+      name: 'vanqExpiresOn',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `Remaining`
+  String get vanqRemainingTraffic {
+    return Intl.message(
+      'Remaining',
+      name: 'vanqRemainingTraffic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in to sync your subscription and traffic`
+  String get vanqSignInPrompt {
+    return Intl.message(
+      'Sign in to sync your subscription and traffic',
+      name: 'vanqSignInPrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VANQ Core account`
+  String get vanqAccount {
+    return Intl.message(
+      'VANQ Core account',
+      name: 'vanqAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign-in failed: {detail}`
+  String vanqLoginFailed(Object detail) {
+    return Intl.message(
+      'Sign-in failed: $detail',
+      name: 'vanqLoginFailed',
+      desc: '',
+      args: [detail],
+    );
+  }
+
+  /// `Please enter your password`
+  String get vanqPasswordRequired {
+    return Intl.message(
+      'Please enter your password',
+      name: 'vanqPasswordRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email`
+  String get vanqEmailRequired {
+    return Intl.message(
+      'Please enter your email',
+      name: 'vanqEmailRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signing in…`
+  String get vanqLoggingIn {
+    return Intl.message(
+      'Signing in…',
+      name: 'vanqLoggingIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in to your VANQ Core account to sync your subscription`
+  String get vanqLoginSubtitle {
+    return Intl.message(
+      'Sign in to your VANQ Core account to sync your subscription',
+      name: 'vanqLoginSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get vanqLogin {
+    return Intl.message('Sign in', name: 'vanqLogin', desc: '', args: []);
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
   /// `Starting VPN…`
   String get startVpn {
     return Intl.message('Starting VPN…', name: 'startVpn', desc: '', args: []);
@@ -2380,10 +2510,10 @@ class AppLocalizations {
     return Intl.message('Disclaimer', name: 'disclaimer', desc: '', args: []);
   }
 
-  /// `Before using FlClash ("the Software"), please read this statement carefully and make sure you understand all of it. Tapping "Agree" means you have read, understood, and accept every term below. If you do not agree, tap "Exit" and stop using the Software.`
+  /// `Before using VANQ Core ("the Software"), please read this statement carefully and make sure you understand all of it. Tapping "Agree" means you have read, understood, and accept every term below. If you do not agree, tap "Exit" and stop using the Software.`
   String get disclaimerDesc {
     return Intl.message(
-      'Before using FlClash ("the Software"), please read this statement carefully and make sure you understand all of it. Tapping "Agree" means you have read, understood, and accept every term below. If you do not agree, tap "Exit" and stop using the Software.',
+      'Before using VANQ Core ("the Software"), please read this statement carefully and make sure you understand all of it. Tapping "Agree" means you have read, understood, and accept every term below. If you do not agree, tap "Exit" and stop using the Software.',
       name: 'disclaimerDesc',
       desc: '',
       args: [],
@@ -4935,10 +5065,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Helper service unavailable; TUN mode cannot be enabled. Reinstall FlClash to restore it.`
+  /// `Helper service unavailable; TUN mode cannot be enabled. Reinstall VANQ Core to restore it.`
   String get helperCorruptTip {
     return Intl.message(
-      'Helper service unavailable; TUN mode cannot be enabled. Reinstall FlClash to restore it.',
+      'Helper service unavailable; TUN mode cannot be enabled. Reinstall VANQ Core to restore it.',
       name: 'helperCorruptTip',
       desc: '',
       args: [],
@@ -4965,20 +5095,20 @@ class AppLocalizations {
     );
   }
 
-  /// `Windows refused to run FlClashCore.exe (error {code}). An app control policy such as Smart App Control or AppLocker blocks unsigned programs; allow FlClash in that policy or turn it off, then try again.`
+  /// `Windows refused to run VANQCoreCore.exe (error {code}). An app control policy such as Smart App Control or AppLocker blocks unsigned programs; allow VANQ Core in that policy or turn it off, then try again.`
   String coreBlockedByPolicyTip(Object code) {
     return Intl.message(
-      'Windows refused to run FlClashCore.exe (error $code). An app control policy such as Smart App Control or AppLocker blocks unsigned programs; allow FlClash in that policy or turn it off, then try again.',
+      'Windows refused to run VANQCoreCore.exe (error $code). An app control policy such as Smart App Control or AppLocker blocks unsigned programs; allow VANQ Core in that policy or turn it off, then try again.',
       name: 'coreBlockedByPolicyTip',
       desc: '',
       args: [code],
     );
   }
 
-  /// `Windows Smart App Control blocked FlClashCore.exe because it is not signed. Open Windows Security → App & browser control → Smart App Control settings, choose Off, then start FlClash again. Smart App Control cannot be turned back on without reinstalling Windows.`
+  /// `Windows Smart App Control blocked VANQCoreCore.exe because it is not signed. Open Windows Security → App & browser control → Smart App Control settings, choose Off, then start VANQ Core again. Smart App Control cannot be turned back on without reinstalling Windows.`
   String get coreBlockedBySmartAppControlTip {
     return Intl.message(
-      'Windows Smart App Control blocked FlClashCore.exe because it is not signed. Open Windows Security → App & browser control → Smart App Control settings, choose Off, then start FlClash again. Smart App Control cannot be turned back on without reinstalling Windows.',
+      'Windows Smart App Control blocked VANQCoreCore.exe because it is not signed. Open Windows Security → App & browser control → Smart App Control settings, choose Off, then start VANQ Core again. Smart App Control cannot be turned back on without reinstalling Windows.',
       name: 'coreBlockedBySmartAppControlTip',
       desc: '',
       args: [],
@@ -7073,10 +7203,10 @@ class AppLocalizations {
     );
   }
 
-  /// `FlClash ran into an error while starting and can't continue. Copy the details to report the problem. If it keeps happening, clearing the data usually lets the app start again.`
+  /// `VANQ Core ran into an error while starting and can't continue. Copy the details to report the problem. If it keeps happening, clearing the data usually lets the app start again.`
   String get initFailedTip {
     return Intl.message(
-      'FlClash ran into an error while starting and can\'t continue. Copy the details to report the problem. If it keeps happening, clearing the data usually lets the app start again.',
+      'VANQ Core ran into an error while starting and can\'t continue. Copy the details to report the problem. If it keeps happening, clearing the data usually lets the app start again.',
       name: 'initFailedTip',
       desc: '',
       args: [],
