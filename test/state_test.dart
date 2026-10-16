@@ -47,6 +47,17 @@ void main() {
         seedColor: darkSeed,
         brightness: Brightness.dark,
         dynamicSchemeVariant: variant,
+      ).copyWith(
+        surface: const Color(0xFF101026),
+        surfaceDim: const Color(0xFF0D0D20),
+        surfaceBright: const Color(0xFF3A3270),
+        surfaceContainerLowest: const Color(0xFF0C0C22),
+        surfaceContainerLow: const Color(0xFF141432),
+        surfaceContainer: const Color(0xFF1C1740),
+        surfaceContainerHigh: const Color(0xFF231D4A),
+        surfaceContainerHighest: const Color(0xFF2C2560),
+        onSurface: const Color(0xFFF4F1FF),
+        onSurfaceVariant: const Color(0xFFA7A9C9),
       ),
     );
   });
