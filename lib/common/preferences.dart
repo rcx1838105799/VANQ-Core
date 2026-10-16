@@ -155,6 +155,41 @@ class Preferences {
     final sharedPreferencesIns = await sharedPreferencesCompleter.future;
     await sharedPreferencesIns?.clear();
   }
+
+  static const _vanqAccountKey = 'vanqAccount';
+
+  Future<void> saveVanqAccount(dynamic account) async {
+    final sharedPreferencesIns = await sharedPreferencesCompleter.future;
+    await sharedPreferencesIns?.setString(
+      _vanqAccountKey,
+      json.encode(account.toJson()),
+    );
+  }
+
+  /// Returns the persisted VANQ account, or null when signed out.
+  ///
+  /// The JSON is decoded generically here to avoid a dependency from
+  /// common/ on the account model; callers cast it into shape.
+  Future<Map<String, dynamic>?> getVanqAccountJson() async {
+    try {
+      final sharedPreferencesIns = await sharedPreferencesCompleter.future;
+      final raw = sharedPreferencesIns?.getString(_vanqAccountKey);
+      if (raw == null) return null;
+      final decoded = json.decode(raw);
+      return decoded is Map<String, dynamic> ? decoded : null;
+    } catch (e) {
+      commonPrint.log(
+        'getVanqAccountJson error ${e.toString()}',
+        logLevel: LogLevel.warning,
+      );
+      return null;
+    }
+  }
+
+  Future<void> clearVanqAccount() async {
+    final sharedPreferencesIns = await sharedPreferencesCompleter.future;
+    await sharedPreferencesIns?.remove(_vanqAccountKey);
+  }
 }
 
 final preferences = Preferences();
