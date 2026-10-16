@@ -200,6 +200,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m71(label) => "Значение «${label}» должно быть URL";
 
+  static String m72(date) => "Истекает ${date}";
+
+  static String m73(detail) => "Ошибка входа: ${detail}";
+
   static String m74(count) =>
       "${Intl.plural(count, one: '${count} год назад', few: '${count} года назад', many: '${count} лет назад', other: '${count} года назад')}";
 
@@ -743,6 +747,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editorUnavailable": MessageLookupByLibrary.simpleMessage(
       "Редактор недоступен",
     ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emptyFallback": MessageLookupByLibrary.simpleMessage(
       "Резерв для пустой группы",
     ),
@@ -932,9 +937,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Введите содержимое правила",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "Разрешение на список приложений отклонено, поэтому установленные приложения недоступны. Предоставьте его вручную в системных настройках.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "Разрешение на список приложений отклонено, поэтому установленные приложения недоступны. Предоставьте его вручную в системных настройках.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "Эта система не выдаёт список установленных приложений без разрешения. Предоставьте его, чтобы настроить прокси для отдельных приложений.",
     ),
@@ -1851,6 +1857,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "userAgent": MessageLookupByLibrary.simpleMessage("User-Agent"),
     "username": MessageLookupByLibrary.simpleMessage("Имя пользователя"),
     "value": MessageLookupByLibrary.simpleMessage("Значение"),
+    "vanqAccount": MessageLookupByLibrary.simpleMessage("Аккаунт VANQ Core"),
+    "vanqEmailRequired": MessageLookupByLibrary.simpleMessage("Введите email"),
+    "vanqExpiresOn": m72,
+    "vanqLoggingIn": MessageLookupByLibrary.simpleMessage("Вход…"),
+    "vanqLogin": MessageLookupByLibrary.simpleMessage("Войти"),
+    "vanqLoginFailed": m73,
+    "vanqLoginSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Войдите в аккаунт VANQ Core для синхронизации подписки",
+    ),
+    "vanqPasswordRequired": MessageLookupByLibrary.simpleMessage(
+      "Введите пароль",
+    ),
+    "vanqRefresh": MessageLookupByLibrary.simpleMessage("Обновить"),
+    "vanqRemainingTraffic": MessageLookupByLibrary.simpleMessage("Осталось"),
+    "vanqSignInPrompt": MessageLookupByLibrary.simpleMessage(
+      "Войдите для синхронизации подписки и трафика",
+    ),
+    "vanqSignInSuccess": MessageLookupByLibrary.simpleMessage("Вход выполнен"),
+    "vanqSignOut": MessageLookupByLibrary.simpleMessage("Выйти"),
+    "vanqTagline": MessageLookupByLibrary.simpleMessage(
+      "Быстро как сакура, надёжно как звёзды",
+    ),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("Яркая"),
     "view": MessageLookupByLibrary.simpleMessage("Просмотр"),
     "virtualIpv4": MessageLookupByLibrary.simpleMessage("Виртуальный IPv4"),
