@@ -356,13 +356,21 @@ jobs:
       - name: Setup Android Signing
         if: startsWith(matrix.platform,'android')
         run: |
-          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/keystore.jks
-          echo "${{ secrets.SERVICE_JSON }}" | base64 --decode > android/app/google-services.json
-          {
-            echo "keyAlias=${{ secrets.KEY_ALIAS }}"
-            echo "storePassword=${{ secrets.STORE_PASSWORD }}"
-            echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
-          } >> android/local.properties
+          # Only install signing files when the secrets exist. With empty
+          # secrets the release build falls back to debug signing and the
+          # committed google-services.json stub; writing empty files would
+          # break both the keystore load and the Google Services plugin.
+          if [ -n "${{ secrets.KEYSTORE }}" ]; then
+            echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/keystore.jks
+            {
+              echo "keyAlias=${{ secrets.KEY_ALIAS }}"
+              echo "storePassword=${{ secrets.STORE_PASSWORD }}"
+              echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
+            } >> android/local.properties
+          fi
+          if [ -n "${{ secrets.SERVICE_JSON }}" ]; then
+            echo "${{ secrets.SERVICE_JSON }}" | base64 --decode > android/app/google-services.json
+          fi
 
       - name: Setup Go
         uses: actions/setup-go@v5
