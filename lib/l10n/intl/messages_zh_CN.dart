@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(detail) => "清除数据失败：${detail}";
 
   static String m2(code) =>
-      "Windows 拒绝运行 FlClashCore.exe（错误 ${code}）。智能应用控制、AppLocker 等应用控制策略会拦截未签名程序，请在该策略中放行 FlClash 或关闭策略后重试。";
+      "Windows 拒绝运行 VANQCoreCore.exe（错误 ${code}）。智能应用控制、AppLocker 等应用控制策略会拦截未签名程序，请在该策略中放行 VANQ Core 或关闭策略后重试。";
 
   static String m3(name) =>
       "应用连续两次未能完成启动。为打断崩溃循环，已取消选中配置 ${name}，并跳过本次自动配置，你可以随时重新选中它。";
@@ -174,9 +174,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m71(label) => "${label}必须为URL";
 
-  static String m72(count) => "${count} 年前";
+  static String m72(date) => "到期时间 ${date}";
 
-  static String m73(count) => "${count} 年前";
+  static String m73(detail) => "登录失败：${detail}";
+
+  static String m74(count) => "${count} 年前";
+
+  static String m75(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -367,7 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "core": MessageLookupByLibrary.simpleMessage("内核"),
     "coreBlockedByPolicyTip": m2,
     "coreBlockedBySmartAppControlTip": MessageLookupByLibrary.simpleMessage(
-      "Windows 智能应用控制拦截了未签名的 FlClashCore.exe。请打开 Windows 安全中心 → 应用和浏览器控制 → 智能应用控制设置，选择「关闭」后重新启动 FlClash。智能应用控制关闭后无法再开启，除非重装 Windows。",
+      "Windows 智能应用控制拦截了未签名的 VANQCoreCore.exe。请打开 Windows 安全中心 → 应用和浏览器控制 → 智能应用控制设置，选择「关闭」后重新启动 VANQ Core。智能应用控制关闭后无法再开启，除非重装 Windows。",
     ),
     "coreStatus": MessageLookupByLibrary.simpleMessage("核心状态"),
     "country": MessageLookupByLibrary.simpleMessage("区域"),
@@ -478,7 +482,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "上述数据由 Google 代为处理和存储，可能被传输至你所在国家或地区以外（如美国）的服务器，并受 Google 隐私政策与 Firebase 隐私和安全说明约束。崩溃报告最多保留 90 天，统计数据按 Firebase 的默认策略保留。",
     ),
     "disclaimerDesc": MessageLookupByLibrary.simpleMessage(
-      "在使用 FlClash（以下简称“本软件”）前，请仔细阅读并充分理解本声明的全部内容。点击“同意”即表示你已阅读、理解并接受以下全部条款；如不同意，请点击“退出”并停止使用本软件。",
+      "在使用 VANQ Core（以下简称“本软件”）前，请仔细阅读并充分理解本声明的全部内容。点击“同意”即表示你已阅读、理解并接受以下全部条款；如不同意，请点击“退出”并停止使用本软件。",
     ),
     "disclaimerFirebasePrivacy": MessageLookupByLibrary.simpleMessage(
       "Firebase 隐私和安全说明",
@@ -551,6 +555,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editRule": MessageLookupByLibrary.simpleMessage("编辑规则"),
     "editSsid": MessageLookupByLibrary.simpleMessage("编辑SSID"),
     "editorUnavailable": MessageLookupByLibrary.simpleMessage("编辑器不可用"),
+    "email": MessageLookupByLibrary.simpleMessage("邮箱"),
     "emptyFallback": MessageLookupByLibrary.simpleMessage("空组兜底"),
     "emptyTip": m22,
     "en": MessageLookupByLibrary.simpleMessage("英语"),
@@ -638,7 +643,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hashByInUser": MessageLookupByLibrary.simpleMessage("按入站用户哈希"),
     "healthCheck": MessageLookupByLibrary.simpleMessage("健康检查"),
     "helperCorruptTip": MessageLookupByLibrary.simpleMessage(
-      "Helper 服务不可用，无法启用 TUN 模式，请重新安装 FlClash。",
+      "Helper 服务不可用，无法启用 TUN 模式，请重新安装 VANQ Core。",
     ),
     "hideFromList": MessageLookupByLibrary.simpleMessage("从列表中隐藏"),
     "hideIp": MessageLookupByLibrary.simpleMessage("隐藏 IP"),
@@ -689,7 +694,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "init": MessageLookupByLibrary.simpleMessage("初始化"),
     "initFailed": MessageLookupByLibrary.simpleMessage("启动失败"),
     "initFailedTip": MessageLookupByLibrary.simpleMessage(
-      "FlClash 启动时出错，无法继续运行。可以复制错误详情用于反馈；如果问题反复出现，清除数据后通常可以重新启动。",
+      "VANQ Core 启动时出错，无法继续运行。可以复制错误详情用于反馈；如果问题反复出现，清除数据后通常可以重新启动。",
     ),
     "initiator": MessageLookupByLibrary.simpleMessage("发起方"),
     "inputProxyGroupName": MessageLookupByLibrary.simpleMessage("输入策略组名称"),
@@ -1354,6 +1359,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "userAgent": MessageLookupByLibrary.simpleMessage("用户代理"),
     "username": MessageLookupByLibrary.simpleMessage("用户名"),
     "value": MessageLookupByLibrary.simpleMessage("值"),
+    "vanqAccount": MessageLookupByLibrary.simpleMessage("VANQ Core 账号"),
+    "vanqEmailRequired": MessageLookupByLibrary.simpleMessage("请输入邮箱"),
+    "vanqExpiresOn": m72,
+    "vanqLoggingIn": MessageLookupByLibrary.simpleMessage("登录中…"),
+    "vanqLogin": MessageLookupByLibrary.simpleMessage("登录"),
+    "vanqLoginFailed": m73,
+    "vanqLoginSubtitle": MessageLookupByLibrary.simpleMessage(
+      "登录你的 VANQ Core 账号，同步订阅信息",
+    ),
+    "vanqPasswordRequired": MessageLookupByLibrary.simpleMessage("请输入密码"),
+    "vanqRefresh": MessageLookupByLibrary.simpleMessage("刷新"),
+    "vanqRemainingTraffic": MessageLookupByLibrary.simpleMessage("剩余流量"),
+    "vanqSignInPrompt": MessageLookupByLibrary.simpleMessage("登录后同步订阅与流量信息"),
+    "vanqSignInSuccess": MessageLookupByLibrary.simpleMessage("登录成功"),
+    "vanqSignOut": MessageLookupByLibrary.simpleMessage("退出登录"),
+    "vanqTagline": MessageLookupByLibrary.simpleMessage("快如樱落，稳若星辰"),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("活力"),
     "view": MessageLookupByLibrary.simpleMessage("查看"),
     "virtualIpv4": MessageLookupByLibrary.simpleMessage("虚拟 IPv4"),
@@ -1370,8 +1391,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "写入系统会同时设置系统时钟，Android 上不生效。",
     ),
-    "yearsAgo": m72,
-    "yearsAgoShort": m73,
+    "yearsAgo": m74,
+    "yearsAgoShort": m75,
     "yes": MessageLookupByLibrary.simpleMessage("是"),
     "zhCN": MessageLookupByLibrary.simpleMessage("中文简体"),
   };
