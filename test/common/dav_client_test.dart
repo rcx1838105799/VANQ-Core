@@ -299,7 +299,8 @@ void main() {
 
     test('download writes the remote archive to the given path', () async {
       final payload = List<int>.generate(64, (index) => index);
-      server.files['/${Uri(pathSegments: [appName, 'backup.zip']).path}'] = payload;
+      server.files['/${Uri(pathSegments: [appName, 'backup.zip']).path}'] =
+          payload;
       final target = join(root.path, 'download.zip');
 
       await buildClient().download(target);
