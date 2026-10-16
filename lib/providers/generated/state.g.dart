@@ -1721,6 +1721,51 @@ abstract class _$RuleProvider extends $Notifier<Rule> {
   }
 }
 
+@ProviderFor(VanqAccount)
+final vanqAccountProvider = VanqAccountProvider._();
+
+final class VanqAccountProvider
+    extends $AsyncNotifierProvider<VanqAccount, VanqAccountData?> {
+  VanqAccountProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'vanqAccountProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$vanqAccountHash();
+
+  @$internal
+  @override
+  VanqAccount create() => VanqAccount();
+}
+
+String _$vanqAccountHash() => r'fb0e2f575cb5a9ff66c68d7673172b7bbc121328';
+
+abstract class _$VanqAccount extends $AsyncNotifier<VanqAccountData?> {
+  FutureOr<VanqAccountData?> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref =
+        this.ref as $Ref<AsyncValue<VanqAccountData?>, VanqAccountData?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<VanqAccountData?>, VanqAccountData?>,
+              AsyncValue<VanqAccountData?>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(currentGroupsState)
 final currentGroupsStateProvider = CurrentGroupsStateProvider._();
 
