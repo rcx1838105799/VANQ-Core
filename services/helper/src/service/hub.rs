@@ -48,7 +48,7 @@ const CORE_PIPE_PREFIX: &str = r"\\.\pipe\FlClashCore_";
 const CORE_SOCKET_PREFIX: &str = "/tmp/FlClashSocket_";
 #[cfg(target_os = "linux")]
 const CORE_SOCKET_SUFFIX: &str = ".sock";
-const PROTOCOL_VERSION_HEADER: &str = "x-flclash-helper-protocol";
+const PROTOCOL_VERSION_HEADER: &str = "x-vanqcore-helper-protocol";
 #[cfg(windows)]
 const PROTOCOL_VERSION: &str = "8";
 #[cfg(not(windows))]
@@ -1338,7 +1338,7 @@ mod tests {
     #[test]
     fn verifies_core_sha256_in_all_build_modes() {
         let path =
-            std::env::temp_dir().join(format!("flclash-helper-core-sha256-{}", std::process::id()));
+            std::env::temp_dir().join(format!("vanqcore-helper-core-sha256-{}", std::process::id()));
         let mut file = File::create(&path).unwrap();
         file.write_all(b"test").unwrap();
         drop(file);
