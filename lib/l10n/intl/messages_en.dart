@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(detail) => "Couldn\'t clear the data: ${detail}";
 
   static String m2(code) =>
-      "Windows refused to run FlClashCore.exe (error ${code}). An app control policy such as Smart App Control or AppLocker blocks unsigned programs; allow FlClash in that policy or turn it off, then try again.";
+      "Windows refused to run VANQCoreCore.exe (error ${code}). An app control policy such as Smart App Control or AppLocker blocks unsigned programs; allow VANQ Core in that policy or turn it off, then try again.";
 
   static String m3(name) =>
       "The app failed to finish launching twice in a row. To break the loop, the profile ${name} has been deselected and automatic setup was skipped. You can select it again at any time.";
@@ -198,10 +198,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m71(label) => "${label} must be a URL";
 
-  static String m72(count) =>
+  static String m72(date) => "Expires ${date}";
+
+  static String m73(detail) => "Sign-in failed: ${detail}";
+
+  static String m74(count) =>
       "${Intl.plural(count, one: '1 year ago', other: '${count} years ago')}";
 
-  static String m73(count) => "${Intl.plural(count, other: '${count}y ago')}";
+  static String m75(count) => "${Intl.plural(count, other: '${count}y ago')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -476,7 +480,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "core": MessageLookupByLibrary.simpleMessage("Core"),
     "coreBlockedByPolicyTip": m2,
     "coreBlockedBySmartAppControlTip": MessageLookupByLibrary.simpleMessage(
-      "Windows Smart App Control blocked FlClashCore.exe because it is not signed. Open Windows Security → App & browser control → Smart App Control settings, choose Off, then start FlClash again. Smart App Control cannot be turned back on without reinstalling Windows.",
+      "Windows Smart App Control blocked VANQCoreCore.exe because it is not signed. Open Windows Security → App & browser control → Smart App Control settings, choose Off, then start VANQ Core again. Smart App Control cannot be turned back on without reinstalling Windows.",
     ),
     "coreStatus": MessageLookupByLibrary.simpleMessage("Core status"),
     "country": MessageLookupByLibrary.simpleMessage("Region"),
@@ -613,7 +617,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "This data is processed and stored by Google on our behalf, may be transferred to servers outside your country or region (such as in the United States), and is governed by the Google Privacy Policy and the Firebase privacy and security documentation. Crash reports are kept for up to 90 days; statistics are kept under the Firebase default retention policy.",
     ),
     "disclaimerDesc": MessageLookupByLibrary.simpleMessage(
-      "Before using FlClash (\"the Software\"), please read this statement carefully and make sure you understand all of it. Tapping \"Agree\" means you have read, understood, and accept every term below. If you do not agree, tap \"Exit\" and stop using the Software.",
+      "Before using VANQ Core (\"the Software\"), please read this statement carefully and make sure you understand all of it. Tapping \"Agree\" means you have read, understood, and accept every term below. If you do not agree, tap \"Exit\" and stop using the Software.",
     ),
     "disclaimerFirebasePrivacy": MessageLookupByLibrary.simpleMessage(
       "Firebase privacy and security",
@@ -714,6 +718,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editorUnavailable": MessageLookupByLibrary.simpleMessage(
       "Editor unavailable",
     ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emptyFallback": MessageLookupByLibrary.simpleMessage("Empty fallback"),
     "emptyTip": m22,
     "en": MessageLookupByLibrary.simpleMessage("English"),
@@ -829,7 +834,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "healthCheck": MessageLookupByLibrary.simpleMessage("Health check"),
     "helperCorruptTip": MessageLookupByLibrary.simpleMessage(
-      "Helper service unavailable; TUN mode cannot be enabled. Reinstall FlClash to restore it.",
+      "Helper service unavailable; TUN mode cannot be enabled. Reinstall VANQ Core to restore it.",
     ),
     "hideFromList": MessageLookupByLibrary.simpleMessage("Hide from list"),
     "hideIp": MessageLookupByLibrary.simpleMessage("Hide IP"),
@@ -888,7 +893,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "init": MessageLookupByLibrary.simpleMessage("Init"),
     "initFailed": MessageLookupByLibrary.simpleMessage("Startup failed"),
     "initFailedTip": MessageLookupByLibrary.simpleMessage(
-      "FlClash ran into an error while starting and can\'t continue. Copy the details to report the problem. If it keeps happening, clearing the data usually lets the app start again.",
+      "VANQ Core ran into an error while starting and can\'t continue. Copy the details to report the problem. If it keeps happening, clearing the data usually lets the app start again.",
     ),
     "initiator": MessageLookupByLibrary.simpleMessage("Initiator"),
     "inputProxyGroupName": MessageLookupByLibrary.simpleMessage(
@@ -897,9 +902,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Enter the rule content",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "This system hides the installed app list until the permission is granted. Authorize it to configure the per-app proxy.",
     ),
@@ -1760,6 +1766,32 @@ class MessageLookup extends MessageLookupByLibrary {
     "userAgent": MessageLookupByLibrary.simpleMessage("User-Agent"),
     "username": MessageLookupByLibrary.simpleMessage("Username"),
     "value": MessageLookupByLibrary.simpleMessage("Value"),
+    "vanqAccount": MessageLookupByLibrary.simpleMessage("VANQ Core account"),
+    "vanqEmailRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your email",
+    ),
+    "vanqExpiresOn": m72,
+    "vanqLoggingIn": MessageLookupByLibrary.simpleMessage("Signing in…"),
+    "vanqLogin": MessageLookupByLibrary.simpleMessage("Sign in"),
+    "vanqLoginFailed": m73,
+    "vanqLoginSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Sign in to your VANQ Core account to sync your subscription",
+    ),
+    "vanqPasswordRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your password",
+    ),
+    "vanqRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
+    "vanqRemainingTraffic": MessageLookupByLibrary.simpleMessage("Remaining"),
+    "vanqSignInPrompt": MessageLookupByLibrary.simpleMessage(
+      "Sign in to sync your subscription and traffic",
+    ),
+    "vanqSignInSuccess": MessageLookupByLibrary.simpleMessage(
+      "Signed in successfully",
+    ),
+    "vanqSignOut": MessageLookupByLibrary.simpleMessage("Sign out"),
+    "vanqTagline": MessageLookupByLibrary.simpleMessage(
+      "Fast as sakura, steady as stars",
+    ),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("Vibrant"),
     "view": MessageLookupByLibrary.simpleMessage("View"),
     "virtualIpv4": MessageLookupByLibrary.simpleMessage("Virtual IPv4"),
@@ -1780,8 +1812,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Write to system also sets the system clock; Android ignores it.",
     ),
-    "yearsAgo": m72,
-    "yearsAgoShort": m73,
+    "yearsAgo": m74,
+    "yearsAgoShort": m75,
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
   };
