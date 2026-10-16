@@ -61,7 +61,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('edit-icon')));
     await tester.pump(const Duration(milliseconds: 500));
     await tester.tap(find.byGlyph(AppGlyphs.addCircle));
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 20; i++) {
       await tester.pump(const Duration(milliseconds: 100));
     }
 
@@ -76,7 +76,7 @@ void main() {
       DashboardWidget.outboundMode,
     ]);
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 40; i++) {
       await tester.pump(const Duration(milliseconds: 100));
     }
     expect(addBadges, findsNothing);
@@ -127,7 +127,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('edit-icon')));
     await tester.pump(const Duration(milliseconds: 500));
     await tester.tap(find.byGlyph(AppGlyphs.addCircle));
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 20; i++) {
       await tester.pump(const Duration(milliseconds: 100));
     }
     return available[available.length - 2].widget;
