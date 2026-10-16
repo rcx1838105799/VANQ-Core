@@ -12,21 +12,27 @@ extension PackageInfoExtension on PackageInfo {
   ].join(' ');
 }
 
+int _parseVersionSegment(String segment) {
+  // Tolerates pre-release suffixes such as the "-vanq2" in "0.9.0-vanq2".
+  final match = RegExp(r'^\d+').firstMatch(segment);
+  return match == null ? 0 : int.parse(match.group(0)!);
+}
+
 int compareVersions(String version1, String version2) {
   final List<String> v1 = version1.split('+')[0].split('.');
   final List<String> v2 = version2.split('+')[0].split('.');
-  final int major1 = int.parse(v1[0]);
-  final int major2 = int.parse(v2[0]);
+  final int major1 = _parseVersionSegment(v1[0]);
+  final int major2 = _parseVersionSegment(v2[0]);
   if (major1 != major2) {
     return major1.compareTo(major2);
   }
-  final int minor1 = v1.length > 1 ? int.parse(v1[1]) : 0;
-  final int minor2 = v2.length > 1 ? int.parse(v2[1]) : 0;
+  final int minor1 = v1.length > 1 ? _parseVersionSegment(v1[1]) : 0;
+  final int minor2 = v2.length > 1 ? _parseVersionSegment(v2[1]) : 0;
   if (minor1 != minor2) {
     return minor1.compareTo(minor2);
   }
-  final int patch1 = v1.length > 2 ? int.parse(v1[2]) : 0;
-  final int patch2 = v2.length > 2 ? int.parse(v2[2]) : 0;
+  final int patch1 = v1.length > 2 ? _parseVersionSegment(v1[2]) : 0;
+  final int patch2 = v2.length > 2 ? _parseVersionSegment(v2[2]) : 0;
   if (patch1 != patch2) {
     return patch1.compareTo(patch2);
   }

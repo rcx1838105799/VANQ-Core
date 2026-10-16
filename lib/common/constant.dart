@@ -10,20 +10,20 @@ import 'package:fl_clash/models/models.dart';
 import 'package:material_ui/material_ui.dart';
 
 const appName = 'VANQ Core';
-const appHelperService = 'FlClashHelperService';
+const appHelperService = 'VANQCoreHelperService';
 const coreManifestName = 'manifest.json';
 const coreName = 'clash.meta';
 const browserUa =
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const packageName = 'com.vanq.core';
-final unixSocketPath = '/tmp/FlClashSocket_${Random().nextInt(10000)}.sock';
-final windowsPipeName = '\\\\.\\pipe\\FlClashCore_${_randomPipeId()}';
+final unixSocketPath = '/tmp/VANQCoreSocket_${Random().nextInt(10000)}.sock';
+final windowsPipeName = '\\\\.\\pipe\\VANQCore_${_randomPipeId()}';
 const helperPort = 47890;
 const helperPortKey =
     'SYSTEM\\CurrentControlSet\\Services\\$appHelperService\\Runtime';
 const helperPortValue = 'Port';
-const helperSocketPath = '/run/flclash/helper.sock';
-const helperProtocolVersionHeader = 'x-flclash-helper-protocol';
+const helperSocketPath = '/run/vanqcore/helper.sock';
+const helperProtocolVersionHeader = 'x-vanqcore-helper-protocol';
 final helperProtocolVersion = Platform.isWindows ? '8' : '6';
 const maxTextScale = 1.4;
 const minTextScale = 0.8;
