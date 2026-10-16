@@ -43,10 +43,7 @@ class VanqAccount extends _$VanqAccount {
 
   /// Signs in with the airport account, persists the token and fetches the
   /// subscription info. Callers handle profile auto-import via [subscribeUrl].
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signIn({required String email, required String password}) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       final authData = await _api.login(email: email, password: password);

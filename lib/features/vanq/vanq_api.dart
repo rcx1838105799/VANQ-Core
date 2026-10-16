@@ -29,9 +29,7 @@ class VanqApi {
     );
     final body = response.data ?? {};
     if (body['status'] != 'success') {
-      throw VanqApiException(
-        _messageOf(body) ?? 'Login failed',
-      );
+      throw VanqApiException(_messageOf(body) ?? 'Login failed');
     }
     final data = body['data'];
     final authData = data is Map ? data['auth_data'] as String? : null;

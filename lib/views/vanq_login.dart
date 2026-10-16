@@ -62,9 +62,7 @@ class _VanqLoginViewState extends ConsumerState<VanqLoginView> {
       setState(() => _error = error.message);
     } catch (error) {
       setState(
-        () => _error = appLocalizations.vanqLoginFailed(
-          compactError(error),
-        ),
+        () => _error = appLocalizations.vanqLoginFailed(compactError(error)),
       );
     } finally {
       if (mounted) {
@@ -98,9 +96,9 @@ class _VanqLoginViewState extends ConsumerState<VanqLoginView> {
     return CommonScaffold(
       title: appLocalizations.vanqLogin,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24).copyWith(
-          top: context.contentTopPadding + 8,
-        ),
+        padding: const EdgeInsets.all(
+          24,
+        ).copyWith(top: context.contentTopPadding + 8),
         child: Form(
           key: _formKey,
           child: Column(
@@ -149,9 +147,7 @@ class _VanqLoginViewState extends ConsumerState<VanqLoginView> {
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 autofillHints: const [AutofillHints.email],
-                decoration: InputDecoration(
-                  labelText: appLocalizations.email,
-                ),
+                decoration: InputDecoration(labelText: appLocalizations.email),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return appLocalizations.vanqEmailRequired;

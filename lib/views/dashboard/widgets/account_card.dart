@@ -24,9 +24,7 @@ class VanqAccountCard extends ConsumerWidget {
       padding: const EdgeInsets.all(20),
       child: account.when(
         data: (data) => data == null
-            ? _SignInPrompt(
-                onSignIn: () => _openLogin(context),
-              )
+            ? _SignInPrompt(onSignIn: () => _openLogin(context))
             : _AccountInfo(
                 onSignOut: () =>
                     ref.read(vanqAccountProvider.notifier).signOut(),
@@ -39,9 +37,7 @@ class VanqAccountCard extends ConsumerWidget {
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
         ),
-        error: (_, _) => _SignInPrompt(
-          onSignIn: () => _openLogin(context),
-        ),
+        error: (_, _) => _SignInPrompt(onSignIn: () => _openLogin(context)),
       ),
     );
   }
@@ -167,9 +163,7 @@ class _AccountInfo extends ConsumerWidget {
             ),
             if (info.expiredAt != null)
               Text(
-                appLocalizations.vanqExpiresOn(
-                  _formatDate(info.expiredAt!),
-                ),
+                appLocalizations.vanqExpiresOn(_formatDate(info.expiredAt!)),
                 style: textTheme.bodySmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
