@@ -68,6 +68,25 @@ const _maxCachedColorSchemes = 64;
 final _colorSchemes =
     <(Color, Brightness, DynamicSchemeVariant, bool), ColorScheme>{};
 
+/// VANQ Core brand surfaces for dark mode (see BRAND.md).
+ColorScheme _applyBrandDark(ColorScheme scheme) {
+  if (scheme.brightness != Brightness.dark) {
+    return scheme;
+  }
+  return scheme.copyWith(
+    surface: const Color(0xFF101026),
+    surfaceDim: const Color(0xFF0D0D20),
+    surfaceBright: const Color(0xFF3A3270),
+    surfaceContainerLowest: const Color(0xFF0C0C22),
+    surfaceContainerLow: const Color(0xFF141432),
+    surfaceContainer: const Color(0xFF1C1740),
+    surfaceContainerHigh: const Color(0xFF231D4A),
+    surfaceContainerHighest: const Color(0xFF2C2560),
+    onSurface: const Color(0xFFF4F1FF),
+    onSurfaceVariant: const Color(0xFFA7A9C9),
+  );
+}
+
 ColorScheme _cachedColorScheme(
   Color seedColor,
   Brightness brightness,
@@ -77,10 +96,12 @@ ColorScheme _cachedColorScheme(
   final key = (seedColor, brightness, variant, pureBlack);
   final colorScheme =
       _colorSchemes.remove(key) ??
-      ColorScheme.fromSeed(
-        seedColor: seedColor,
-        brightness: brightness,
-        dynamicSchemeVariant: variant,
+      _applyBrandDark(
+        ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: brightness,
+          dynamicSchemeVariant: variant,
+        ),
       ).toPureBlack(pureBlack);
   _colorSchemes[key] = colorScheme;
   if (_colorSchemes.length > _maxCachedColorSchemes) {

@@ -97,8 +97,8 @@ class AboutView extends ConsumerWidget {
               _buildLinkItem(
                 glyph: AppGlyphs.cpu,
                 title: appLocalizations.core,
-                url: 'https://github.com/chen08209/Clash.Meta/tree/FlClash',
-                label: 'github.com/chen08209/Clash.Meta',
+                url: 'https://github.com/$repository/tree/main/core/Clash.Meta',
+                label: 'github.com/$repository',
               ),
               // TODO: 有官方 Telegram 频道后取消注释
               // _buildLinkItem(

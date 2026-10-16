@@ -16,6 +16,7 @@ import 'app.dart';
 import 'config.dart';
 import 'core.dart';
 import 'database.dart';
+import '../features/vanq/vanq_api.dart';
 
 part 'generated/state.g.dart';
 part 'state/proxies.dart';
@@ -25,3 +26,4 @@ part 'state/theme.dart';
 part 'state/profile.dart';
 part 'state/custom.dart';
 part 'state/custom_import.dart';
+part 'state/vanq.dart';

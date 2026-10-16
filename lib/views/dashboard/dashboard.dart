@@ -9,6 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'widget_metrics.dart';
 import 'widget_registry.dart';
+import 'widgets/account_card.dart';
+import 'widgets/brand_header.dart';
 import 'widgets/core_status_button.dart';
 import 'widgets/start_button.dart';
 
@@ -188,7 +190,28 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               child: CustomScrollView(
                 slivers: [
                   SliverPadding(
-                    padding: padding,
+                    padding: padding.copyWith(bottom: spacing),
+                    sliver: SliverToBoxAdapter(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: dashboardMaxGridWidth,
+                          ),
+                          child: const Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              BrandHeader(),
+                              SizedBox(height: 16),
+                              VanqAccountCard(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: padding.copyWith(top: 0),
                     sliver: SliverToBoxAdapter(
                       child: Align(
                         alignment: Alignment.topCenter,
