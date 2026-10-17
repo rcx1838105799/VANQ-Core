@@ -466,6 +466,7 @@ jobs:
           yq -i '.hooks.user_defines.setup.build_assets = false | .hooks.user_defines.rust_api.build_assets = false' pubspec.yaml
 
       - name: Generate release notes
+        if: ${{ env.IS_STABLE == 'true' }}
         shell: bash
         env:
           IS_STABLE: ${{ env.IS_STABLE }}
