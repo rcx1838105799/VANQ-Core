@@ -114,7 +114,7 @@ class _DiceFace extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      decoration: const ShapeDecoration(
+      decoration: ShapeDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFF6C5CE7), Color(0xFFFD79A8)],
           begin: Alignment.topLeft,

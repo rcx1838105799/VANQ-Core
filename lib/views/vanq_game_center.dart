@@ -79,7 +79,7 @@ class _PointsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: const ShapeDecoration(
+      decoration: ShapeDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFF6C5CE7), Color(0xFFFD79A8)],
           begin: Alignment.topLeft,
