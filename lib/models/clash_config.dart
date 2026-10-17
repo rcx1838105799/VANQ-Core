@@ -27,7 +27,7 @@ const baselineDnsOverrideKeys = {
 const baselineDns = Dns(
   enable: true,
   enhancedMode: DnsMode.fakeIp,
-  nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query'],
+  nameserver: ['https://dns.alidns.com/dns-query'],
 );
 const defaultGeoXUrl = {
   GeoResource.MMDB:
