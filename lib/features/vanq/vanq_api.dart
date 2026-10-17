@@ -11,6 +11,8 @@ class VanqApi {
   static const baseUrl = 'https://vq.wanwan.biz.id';
   static const _loginPath = '/api/v1/passport/auth/login';
   static const _subscribePath = '/api/v1/user/getSubscribe';
+  static const _redeemPath = '/api/v1/user/redeem/redeem';
+  static const _guestConfigPath = '/api/v1/guest/comm/config';
 
   final Dio _dio;
 
@@ -60,9 +62,50 @@ class VanqApi {
     return VanqSubscribeInfo.fromJson(data);
   }
 
+  /// Fetches the public plan list from the guest config endpoint.
+  Future<List<VanqPlan>> getPlans() async {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '$baseUrl$_guestConfigPath',
+    );
+    final body = response.data ?? {};
+    if (body['status'] != 'success') {
+      throw VanqApiException(_messageOf(body) ?? 'Failed to fetch plans');
+    }
+    final data = body['data'];
+    final plans = data is Map ? data['plans'] as List? : null;
+    if (plans == null) return [];
+    return plans
+        .whereType<Map<String, dynamic>>()
+        .map(VanqPlan.fromJson)
+        .toList();
+  }
+
   String? _messageOf(Map<String, dynamic> body) {
     final message = body['message'];
     return message is String && message.isNotEmpty ? message : null;
+  }
+
+  /// Redeems an Xboard redemption code for traffic.
+  ///
+  /// [authData] is the `"Bearer <token>"` string from [login].
+  /// Returns the panel's success message. Throws [VanqApiException] on failure.
+  Future<String> redeemCode({
+    required String authData,
+    required String code,
+  }) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '$baseUrl$_redeemPath',
+      data: {'code': code.trim()},
+      options: Options(
+        headers: {'Authorization': authData},
+        contentType: Headers.formUrlEncodedContentType,
+      ),
+    );
+    final body = response.data ?? {};
+    if (body['status'] != 'success') {
+      throw VanqApiException(_messageOf(body) ?? '兑换失败');
+    }
+    return _messageOf(body) ?? '兑换成功';
   }
 }
 
@@ -73,6 +116,51 @@ class VanqApiException implements Exception {
 
   @override
   String toString() => 'VanqApiException: $message';
+}
+
+/// A purchasable plan from the Xboard panel.
+class VanqPlan {
+  final int id;
+  final String name;
+  final String? content;
+  final double price;
+  final int? monthPrice;
+  final int? quarterPrice;
+  final int? halfYearPrice;
+  final int? yearPrice;
+
+  const VanqPlan({
+    required this.id,
+    required this.name,
+    this.content,
+    required this.price,
+    this.monthPrice,
+    this.quarterPrice,
+    this.halfYearPrice,
+    this.yearPrice,
+  });
+
+  factory VanqPlan.fromJson(Map<String, dynamic> json) {
+    return VanqPlan(
+      id: _asInt(json['id']),
+      name: json['name'] as String? ?? '',
+      content: json['content'] as String?,
+      price: (json['price'] as num?)?.toDouble() ?? 0,
+      monthPrice: _asIntOrNull(json['month_price']),
+      quarterPrice: _asIntOrNull(json['quarter_price']),
+      halfYearPrice: _asIntOrNull(json['half_year_price']),
+      yearPrice: _asIntOrNull(json['year_price']),
+    );
+  }
+
+  static int _asInt(Object? v) => _asIntOrNull(v) ?? 0;
+
+  static int? _asIntOrNull(Object? v) {
+    if (v is int) return v;
+    if (v is num) return v.toInt();
+    if (v is String) return int.tryParse(v);
+    return null;
+  }
 }
 
 /// The user object returned by `GET /api/v1/user/getSubscribe`.

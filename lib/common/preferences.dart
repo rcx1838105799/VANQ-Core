@@ -190,6 +190,40 @@ class Preferences {
     final sharedPreferencesIns = await sharedPreferencesCompleter.future;
     await sharedPreferencesIns?.remove(_vanqAccountKey);
   }
+
+  static const _vanqPointsKey = 'vanqGamePoints';
+  static const _vanqCheckInKey = 'vanqLastCheckIn';
+  static const _vanqCheckInStreakKey = 'vanqCheckInStreak';
+
+  Future<int> getVanqPoints() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getInt(_vanqPointsKey) ?? 0;
+  }
+
+  Future<void> saveVanqPoints(int points) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setInt(_vanqPointsKey, points);
+  }
+
+  Future<String?> getVanqLastCheckIn() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getString(_vanqCheckInKey);
+  }
+
+  Future<void> saveVanqLastCheckIn(String date) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setString(_vanqCheckInKey, date);
+  }
+
+  Future<int> getVanqCheckInStreak() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getInt(_vanqCheckInStreakKey) ?? 0;
+  }
+
+  Future<void> saveVanqCheckInStreak(int streak) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setInt(_vanqCheckInStreakKey, streak);
+  }
 }
 
 final preferences = Preferences();

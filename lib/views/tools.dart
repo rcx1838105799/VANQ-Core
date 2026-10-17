@@ -9,6 +9,8 @@ import 'package:fl_clash/views/access.dart';
 import 'package:fl_clash/views/backup_and_restore.dart';
 import 'package:fl_clash/views/config/general.dart';
 import 'package:fl_clash/views/hotkey.dart';
+import 'package:fl_clash/views/vanq_game_center.dart';
+import 'package:fl_clash/views/vanq_plans.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,6 +45,24 @@ class _ToolViewState extends ConsumerState<ToolsView> {
         const _DisclaimerItem(),
         if (enableDeveloperMode) const _DeveloperItem(),
         const _InfoItem(),
+      ],
+    );
+  }
+
+  List<Widget> _getVanqList() {
+    return generateSection(
+      title: 'VANQ Core',
+      items: [
+        ListItem.open(
+          leading: const Text('🎮', style: TextStyle(fontSize: 24)),
+          title: const Text('游戏中心'),
+          widget: const VanqGameCenterView(),
+        ),
+        ListItem.open(
+          leading: const Text('💎', style: TextStyle(fontSize: 24)),
+          title: const Text('套餐购买'),
+          widget: const VanqPlansView(),
+        ),
       ],
     );
   }
@@ -85,6 +105,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
           );
         },
       ),
+      ..._getVanqList(),
       ..._getSettingList(),
       ..._getOtherList(appSetting.developerMode),
     ];
