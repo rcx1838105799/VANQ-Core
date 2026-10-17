@@ -101,13 +101,13 @@ class _PlanCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+      decoration: const ShapeDecoration(
+        gradient: LinearGradient(
           colors: [Color(0xFF6C5CE7), Color(0xFFFD79A8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        shape: AppShape.all(AppCorner.lg),
         boxShadow: [
           BoxShadow(
             color: const Color(0xFF6C5CE7).withValues(alpha: 0.3),

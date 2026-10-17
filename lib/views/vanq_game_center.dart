@@ -1,4 +1,5 @@
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/icons/icons.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
@@ -78,13 +79,13 @@ class _PointsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+      decoration: const ShapeDecoration(
+        gradient: LinearGradient(
           colors: [Color(0xFF6C5CE7), Color(0xFFFD79A8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        shape: AppShape.all(AppCorner.lg),
       ),
       child: Row(
         children: [
@@ -202,7 +203,7 @@ class _GameTile extends StatelessWidget {
         leading: Text(icon, style: const TextStyle(fontSize: 32)),
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: const Icon(Icons.chevron_right),
+        trailing: const GlyphIcon(AppGlyphs.chevronForward),
         onTap: onTap,
       ),
     );
