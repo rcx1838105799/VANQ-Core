@@ -1766,6 +1766,50 @@ abstract class _$VanqAccount extends $AsyncNotifier<VanqAccountData?> {
   }
 }
 
+@ProviderFor(VanqGame)
+final vanqGameProvider = VanqGameProvider._();
+
+final class VanqGameProvider
+    extends $AsyncNotifierProvider<VanqGame, VanqGameData> {
+  VanqGameProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'vanqGameProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$vanqGameHash();
+
+  @$internal
+  @override
+  VanqGame create() => VanqGame();
+}
+
+String _$vanqGameHash() => r'647ff8e3f4b9598be3151804e17a047334740c54';
+
+abstract class _$VanqGame extends $AsyncNotifier<VanqGameData> {
+  FutureOr<VanqGameData> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<VanqGameData>, VanqGameData>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<VanqGameData>, VanqGameData>,
+              AsyncValue<VanqGameData>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(currentGroupsState)
 final currentGroupsStateProvider = CurrentGroupsStateProvider._();
 
