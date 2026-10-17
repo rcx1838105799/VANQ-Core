@@ -82,8 +82,7 @@ class _VanqPokerGameViewState extends ConsumerState<VanqPokerGameView> {
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: AppShape.all(AppCorner.sm),
-              ),
-                boxShadow: [
+                shadows: [
                   BoxShadow(
                     color: const Color(0xFF6C5CE7).withValues(alpha: 0.3),
                     blurRadius: 16,
