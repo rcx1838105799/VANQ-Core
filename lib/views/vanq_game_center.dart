@@ -1,5 +1,4 @@
 import 'package:fl_clash/common/common.dart';
-import 'package:fl_clash/icons/icons.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
@@ -7,8 +6,16 @@ import 'package:material_ui/material_ui.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/features/vanq/vanq_api.dart';
 
+import 'vanq_game_2048.dart';
+import 'vanq_game_blackjack.dart';
+import 'vanq_game_ddz.dart';
 import 'vanq_game_dice.dart';
+import 'vanq_game_memory.dart';
 import 'vanq_game_poker.dart';
+import 'vanq_game_reaction.dart';
+import 'vanq_game_rhythm.dart';
+import 'vanq_game_rps.dart';
+import 'vanq_game_slots.dart';
 import 'vanq_game_wheel.dart';
 
 /// VANQ Core game center: check-in, mini-games, points.
@@ -40,26 +47,110 @@ class VanqGameCenterView extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 8),
-            _GameTile(
-              title: '掷骰子',
-              subtitle: '猜大小，赢积分',
-              icon: '🎲',
-              onTap: () =>
-                  BaseNavigator.push(context, const VanqDiceGameView()),
+            Text(
+              '每种游戏每日限 20 次，游戏积分每日上限 200',
+              style: context.textTheme.bodySmall,
             ),
-            _GameTile(
-              title: '猜扑克',
-              subtitle: '猜红黑，赢积分',
-              icon: '🃏',
-              onTap: () =>
-                  BaseNavigator.push(context, const VanqPokerGameView()),
-            ),
-            _GameTile(
-              title: '幸运转盘',
-              subtitle: '转一转，好运来',
-              icon: '🎡',
-              onTap: () =>
-                  BaseNavigator.push(context, const VanqWheelGameView()),
+            const SizedBox(height: 8),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 1.05,
+              children: [
+                _GameGridTile(
+                  gameId: 'ddz',
+                  title: '斗地主',
+                  icon: '🃏',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqDdzGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'g2048',
+                  title: '2048',
+                  icon: '🔢',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqGame2048View()),
+                ),
+                _GameGridTile(
+                  gameId: 'memory',
+                  title: '记忆翻牌',
+                  icon: '🌸',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqMemoryGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'blackjack',
+                  title: '21 点',
+                  icon: '♠️',
+                  data: data,
+                  onTap: () => BaseNavigator.push(
+                    context,
+                    const VanqBlackjackGameView(),
+                  ),
+                ),
+                _GameGridTile(
+                  gameId: 'slots',
+                  title: '老虎机',
+                  icon: '🎰',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqSlotsGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'rps',
+                  title: '猜拳',
+                  icon: '✊',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqRpsGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'rhythm',
+                  title: '节奏打击',
+                  icon: '♪',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqRhythmGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'reaction',
+                  title: '反应测试',
+                  icon: '⚡',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqReactionGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'dice',
+                  title: '掷骰子',
+                  icon: '🎲',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqDiceGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'poker',
+                  title: '猜扑克',
+                  icon: '♥️',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqPokerGameView()),
+                ),
+                _GameGridTile(
+                  gameId: 'wheel',
+                  title: '幸运转盘',
+                  icon: '🎡',
+                  data: data,
+                  onTap: () =>
+                      BaseNavigator.push(context, const VanqWheelGameView()),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
             _RedeemCard(),
@@ -183,28 +274,46 @@ class _CheckInCard extends ConsumerWidget {
   }
 }
 
-class _GameTile extends StatelessWidget {
+class _GameGridTile extends StatelessWidget {
+  final String gameId;
   final String title;
-  final String subtitle;
   final String icon;
+  final VanqGameData data;
   final VoidCallback onTap;
 
-  const _GameTile({
+  const _GameGridTile({
+    required this.gameId,
     required this.title,
-    required this.subtitle,
     required this.icon,
+    required this.data,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final remaining = data.remainingPlays(gameId);
     return Card(
-      child: ListTile(
-        leading: Text(icon, style: const TextStyle(fontSize: 32)),
-        title: Text(title),
-        subtitle: Text(subtitle),
-        trailing: const GlyphIcon(AppGlyphs.chevronForward),
+      child: InkWell(
         onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(icon, style: const TextStyle(fontSize: 28)),
+              const SizedBox(height: 4),
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 2),
+              Text(
+                remaining > 0 ? '剩余 $remaining 次' : '今日已用完',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: remaining > 0 ? null : Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

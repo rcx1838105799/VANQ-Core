@@ -200,6 +200,7 @@ class Preferences {
   static const _vanqAffectionDayKey = 'vanqAffectionDay';
   static const _vanqAddedTodayKey = 'vanqAddedToday';
   static const _vanqBackgroundIdKey = 'vanqBackgroundId';
+  static const _vanqGameDailyKey = 'vanqGameDaily';
 
   Future<int> getVanqPoints() async {
     final sp = await sharedPreferencesCompleter.future;
@@ -303,6 +304,35 @@ class Preferences {
   Future<void> saveVanqBackgroundId(String id) async {
     final sp = await sharedPreferencesCompleter.future;
     await sp?.setString(_vanqBackgroundIdKey, id);
+  }
+
+  Future<({Map<String, int> plays, int earned})> getVanqGameDaily() async {
+    final sp = await sharedPreferencesCompleter.future;
+    final raw = sp?.getString(_vanqGameDailyKey);
+    final today = DateTime.now().toIso8601String().substring(0, 10);
+    if (raw == null) return (plays: <String, int>{}, earned: 0);
+    try {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      if (decoded['date'] != today) {
+        return (plays: <String, int>{}, earned: 0);
+      }
+      final playsRaw = decoded['plays'] as Map<String, dynamic>? ?? {};
+      final plays = playsRaw.map(
+        (key, value) => MapEntry(key, (value as num).toInt()),
+      );
+      return (plays: plays, earned: (decoded['earned'] as num?)?.toInt() ?? 0);
+    } catch (_) {
+      return (plays: <String, int>{}, earned: 0);
+    }
+  }
+
+  Future<void> saveVanqGameDaily(Map<String, int> plays, int earned) async {
+    final sp = await sharedPreferencesCompleter.future;
+    final today = DateTime.now().toIso8601String().substring(0, 10);
+    await sp?.setString(
+      _vanqGameDailyKey,
+      jsonEncode({'date': today, 'plays': plays, 'earned': earned}),
+    );
   }
 }
 

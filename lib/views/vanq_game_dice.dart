@@ -42,18 +42,30 @@ class _VanqDiceGameViewState extends ConsumerState<VanqDiceGameView> {
     }
     final isBig = _total >= 7;
     final win = isBig == guessBig;
+    var result = win ? '🎉 猜对了！' : '😅 猜错了，再试一次';
     if (win) {
-      await ref.read(vanqGameProvider.notifier).addPoints(8);
+      final awarded = await ref
+          .read(vanqGameProvider.notifier)
+          .playGame('dice', 8);
+      if (awarded < 0) {
+        result = '今日次数已用完，明天再来';
+      } else if (awarded > 0) {
+        result = '🎉 猜对了！+$awarded 积分';
+      } else {
+        result = '🎉 猜对了！今日积分已达上限';
+      }
     }
     if (!mounted) return;
     setState(() {
       _rolling = false;
-      _result = win ? '🎉 猜对了！+8 积分' : '😅 猜错了，再试一次';
+      _result = result;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final game = ref.watch(vanqGameProvider).value;
+    final outOfPlays = game != null && game.remainingPlays('dice') <= 0;
     return Scaffold(
       appBar: AppBar(title: const Text('掷骰子')),
       body: Center(
@@ -84,18 +96,23 @@ class _VanqDiceGameViewState extends ConsumerState<VanqDiceGameView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FilledButton(
-                  onPressed: _rolling ? null : () => _guess(false),
+                  onPressed: _rolling || outOfPlays
+                      ? null
+                      : () => _guess(false),
                   child: const Text('小 (2-6)'),
                 ),
                 const SizedBox(width: 16),
                 FilledButton(
-                  onPressed: _rolling ? null : () => _guess(true),
+                  onPressed: _rolling || outOfPlays ? null : () => _guess(true),
                   child: const Text('大 (7-12)'),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            Text('猜对 +8 积分，猜错不扣分', style: context.textTheme.bodySmall),
+            Text(
+              outOfPlays ? '今日次数已用完，明天再来' : '猜对 +8 积分，猜错不扣分',
+              style: context.textTheme.bodySmall,
+            ),
           ],
         ),
       ),

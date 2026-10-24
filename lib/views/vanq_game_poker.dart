@@ -56,20 +56,32 @@ class _VanqPokerGameViewState extends ConsumerState<VanqPokerGameView> {
         : _blackCards[_random.nextInt(2)];
     final rank = _ranks[_random.nextInt(_ranks.length)];
     final win = isRed == guessRed;
+    var result = win ? '🎉 猜对了！' : '😅 猜错了，再试一次';
     if (win) {
-      await ref.read(vanqGameProvider.notifier).addPoints(8);
+      final awarded = await ref
+          .read(vanqGameProvider.notifier)
+          .playGame('poker', 8);
+      if (awarded < 0) {
+        result = '今日次数已用完，明天再来';
+      } else if (awarded > 0) {
+        result = '🎉 猜对了！+$awarded 积分';
+      } else {
+        result = '🎉 猜对了！今日积分已达上限';
+      }
     }
     if (!mounted) return;
     setState(() {
       _playing = false;
       _isRed = isRed;
       _card = '$rank$suit';
-      _result = win ? '🎉 猜对了！+8 积分' : '😅 猜错了，再试一次';
+      _result = result;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final game = ref.watch(vanqGameProvider).value;
+    final outOfPlays = game != null && game.remainingPlays('poker') <= 0;
     return Scaffold(
       appBar: AppBar(title: const Text('猜扑克')),
       body: Center(
@@ -114,13 +126,15 @@ class _VanqPokerGameViewState extends ConsumerState<VanqPokerGameView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FilledButton(
-                  onPressed: _playing ? null : () => _guess(true),
+                  onPressed: _playing || outOfPlays ? null : () => _guess(true),
                   style: FilledButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text('♥ 红色'),
                 ),
                 const SizedBox(width: 16),
                 FilledButton(
-                  onPressed: _playing ? null : () => _guess(false),
+                  onPressed: _playing || outOfPlays
+                      ? null
+                      : () => _guess(false),
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.black87,
                   ),
@@ -129,7 +143,10 @@ class _VanqPokerGameViewState extends ConsumerState<VanqPokerGameView> {
               ],
             ),
             const SizedBox(height: 16),
-            Text('猜对 +8 积分，猜错不扣分', style: context.textTheme.bodySmall),
+            Text(
+              outOfPlays ? '今日次数已用完，明天再来' : '猜对 +8 积分，猜错不扣分',
+              style: context.textTheme.bodySmall,
+            ),
           ],
         ),
       ),

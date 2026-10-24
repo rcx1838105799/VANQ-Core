@@ -63,16 +63,28 @@ class _VanqWheelGameViewState extends ConsumerState<VanqWheelGameView>
     await _controller.forward();
     if (!mounted) return;
     final prize = _prizes[_random.nextInt(_prizes.length)];
-    await ref.read(vanqGameProvider.notifier).addPoints(prize);
+    final awarded = await ref
+        .read(vanqGameProvider.notifier)
+        .playGame('wheel', prize);
+    String result;
+    if (awarded < 0) {
+      result = '今日次数已用完，明天再来';
+    } else if (awarded > 0) {
+      result = '🎉 恭喜获得 $awarded 积分！';
+    } else {
+      result = '今日积分已达上限';
+    }
     setState(() {
       _spinning = false;
       _lastSpin = DateTime.now();
-      _result = '🎉 恭喜获得 $prize 积分！';
+      _result = result;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final game = ref.watch(vanqGameProvider).value;
+    final outOfPlays = game != null && game.remainingPlays('wheel') <= 0;
     return Scaffold(
       appBar: AppBar(title: const Text('幸运转盘')),
       body: Center(
@@ -129,11 +141,14 @@ class _VanqWheelGameViewState extends ConsumerState<VanqWheelGameView>
             ],
             const SizedBox(height: 32),
             FilledButton(
-              onPressed: _spinning ? null : _spin,
+              onPressed: _spinning || outOfPlays ? null : _spin,
               child: Text(_spinning ? '转动中...' : '开始转动'),
             ),
             const SizedBox(height: 16),
-            Text('每次转动随机获得 2-20 积分，10秒冷却', style: context.textTheme.bodySmall),
+            Text(
+              outOfPlays ? '今日次数已用完，明天再来' : '每次转动随机获得 2-20 积分，10秒冷却，每日限 20 次',
+              style: context.textTheme.bodySmall,
+            ),
           ],
         ),
       ),
