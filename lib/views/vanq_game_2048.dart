@@ -231,22 +231,26 @@ class _VanqGame2048ViewState extends ConsumerState<VanqGame2048View> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
+                  tooltip: '向左',
                   onPressed: _started ? () => _move(_Dir.left) : null,
                   icon: const Text('⬅️', style: TextStyle(fontSize: 24)),
                 ),
                 Column(
                   children: [
                     IconButton(
+                      tooltip: '向上',
                       onPressed: _started ? () => _move(_Dir.up) : null,
                       icon: const Text('⬆️', style: TextStyle(fontSize: 24)),
                     ),
                     IconButton(
+                      tooltip: '向下',
                       onPressed: _started ? () => _move(_Dir.down) : null,
                       icon: const Text('⬇️', style: TextStyle(fontSize: 24)),
                     ),
                   ],
                 ),
                 IconButton(
+                  tooltip: '向右',
                   onPressed: _started ? () => _move(_Dir.right) : null,
                   icon: const Text('➡️', style: TextStyle(fontSize: 24)),
                 ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// VANQ Core matte dark theme tokens, matching the VANQ-Aurora website theme.
 ///
