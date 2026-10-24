@@ -116,9 +116,9 @@ class _ToolViewState extends ConsumerState<ToolsView> {
           );
         },
       ),
-      ..._getVanqList(),
       ..._getSettingList(),
       ..._getOtherList(appSetting.developerMode),
+      ..._getVanqList(),
     ];
     return CommonScaffold(
       title: context.appLocalizations.tools,
