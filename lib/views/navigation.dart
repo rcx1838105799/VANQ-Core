@@ -2,6 +2,7 @@ import 'package:fl_clash/common/app_ports.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/icons/app_glyphs.dart';
 import 'package:fl_clash/models/models.dart';
+import 'package:fl_clash/views/vanq_home.dart';
 import 'package:fl_clash/views/views.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -19,7 +20,7 @@ class Navigation implements NavigationPort {
         glyph: AppGlyphs.dashboard,
         label: PageLabel.dashboard,
         builder: (_) =>
-            const DashboardView(key: GlobalObjectKey(PageLabel.dashboard)),
+            const VanqHomeView(key: GlobalObjectKey(PageLabel.dashboard)),
       ),
       NavigationItem(
         glyph: AppGlyphs.proxies,
