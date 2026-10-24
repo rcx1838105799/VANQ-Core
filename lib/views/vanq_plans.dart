@@ -1,9 +1,9 @@
 import 'package:fl_clash/common/common.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'package:fl_clash/features/vanq/vanq_api.dart';
+import 'vanq_payment.dart';
 
 /// VANQ Core plans page: anime-style plan cards, payment via Xboard web page.
 class VanqPlansView extends ConsumerStatefulWidget {
@@ -44,12 +44,9 @@ class _VanqPlansViewState extends ConsumerState<VanqPlansView> {
   }
 
   Future<void> _buy(VanqPlan plan) async {
-    // Open Xboard's own payment page in the browser.
-    final uri = Uri.parse('${VanqApi.baseUrl}/#/plan');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else if (mounted) {
-      context.showSnackBar('无法打开支付页面');
+    // Embedded WebView payment, no external browser jump.
+    if (mounted) {
+      await BaseNavigator.push(context, VanqPaymentView(planId: plan.id));
     }
   }
 
