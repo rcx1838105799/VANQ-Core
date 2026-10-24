@@ -194,6 +194,12 @@ class Preferences {
   static const _vanqPointsKey = 'vanqGamePoints';
   static const _vanqCheckInKey = 'vanqLastCheckIn';
   static const _vanqCheckInStreakKey = 'vanqCheckInStreak';
+  static const _vanqOwnedCharsKey = 'vanqOwnedChars';
+  static const _vanqCompanionIdKey = 'vanqCompanionId';
+  static const _vanqAffectionKey = 'vanqAffection';
+  static const _vanqAffectionDayKey = 'vanqAffectionDay';
+  static const _vanqAddedTodayKey = 'vanqAddedToday';
+  static const _vanqBackgroundIdKey = 'vanqBackgroundId';
 
   Future<int> getVanqPoints() async {
     final sp = await sharedPreferencesCompleter.future;
@@ -223,6 +229,80 @@ class Preferences {
   Future<void> saveVanqCheckInStreak(int streak) async {
     final sp = await sharedPreferencesCompleter.future;
     await sp?.setInt(_vanqCheckInStreakKey, streak);
+  }
+
+  Future<List<String>> getVanqOwnedChars() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getStringList(_vanqOwnedCharsKey) ?? [];
+  }
+
+  Future<void> saveVanqOwnedChars(List<String> ids) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setStringList(_vanqOwnedCharsKey, ids);
+  }
+
+  Future<String?> getVanqCompanionId() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getString(_vanqCompanionIdKey);
+  }
+
+  Future<void> saveVanqCompanionId(String id) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setString(_vanqCompanionIdKey, id);
+  }
+
+  Future<Map<String, int>> getVanqAffection() async {
+    final sp = await sharedPreferencesCompleter.future;
+    final raw = sp?.getString(_vanqAffectionKey);
+    if (raw == null) return {};
+    try {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      return decoded.map((key, value) => MapEntry(key, (value as num).toInt()));
+    } catch (_) {
+      return {};
+    }
+  }
+
+  Future<void> saveVanqAffection(Map<String, int> affection) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setString(_vanqAffectionKey, jsonEncode(affection));
+  }
+
+  Future<String?> getVanqAffectionDay() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getString(_vanqAffectionDayKey);
+  }
+
+  Future<void> saveVanqAffectionDay(String day) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setString(_vanqAffectionDayKey, day);
+  }
+
+  Future<Map<String, int>> getVanqAddedToday() async {
+    final sp = await sharedPreferencesCompleter.future;
+    final raw = sp?.getString(_vanqAddedTodayKey);
+    if (raw == null) return {};
+    try {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      return decoded.map((key, value) => MapEntry(key, (value as num).toInt()));
+    } catch (_) {
+      return {};
+    }
+  }
+
+  Future<void> saveVanqAddedToday(Map<String, int> added) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setString(_vanqAddedTodayKey, jsonEncode(added));
+  }
+
+  Future<String> getVanqBackgroundId() async {
+    final sp = await sharedPreferencesCompleter.future;
+    return sp?.getString(_vanqBackgroundIdKey) ?? '';
+  }
+
+  Future<void> saveVanqBackgroundId(String id) async {
+    final sp = await sharedPreferencesCompleter.future;
+    await sp?.setString(_vanqBackgroundIdKey, id);
   }
 }
 

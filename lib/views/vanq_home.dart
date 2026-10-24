@@ -6,6 +6,7 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'vanq_gacha.dart';
 import 'vanq_game_center.dart';
 import 'vanq_login.dart';
 import 'vanq_plans.dart';
@@ -48,39 +49,71 @@ class _VanqHomeViewState extends ConsumerState<VanqHomeView> {
   Widget build(BuildContext context) {
     final coreStatus = ref.watch(coreStatusProvider);
     final account = ref.watch(vanqAccountProvider).value;
+    final companion =
+        ref.watch(vanqCompanionProvider).value?.companion ??
+        VanqCharacter.fallback;
+    final bgId = ref.watch(vanqBackgroundProvider).value ?? '';
+    final bgChar = bgId.isEmpty ? null : VanqCharacter.byId(bgId);
     return Scaffold(
       backgroundColor: VanqTheme.background,
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+        child: Stack(
           children: [
-            _TopBar(email: account?.info.email, onAvatarTap: _openLogin),
-            const SizedBox(height: 20),
-            _CompanionArea(
-              greeting: _showGreeting ? _greetings[_greetingIndex] : null,
-              onTap: () {
-                setState(() {
-                  _greetingIndex = (_greetingIndex + 1) % _greetings.length;
-                  _showGreeting = true;
-                });
-              },
+            if (bgChar != null)
+              Positioned.fill(
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Opacity(
+                        opacity: 0.25,
+                        child: Image.asset(
+                          bgChar.portraitAsset,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Container(color: const Color(0xB30A0A0B)),
+                    ),
+                  ],
+                ),
+              ),
+            ListView(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+              children: [
+                _TopBar(email: account?.info.email, onAvatarTap: _openLogin),
+                const SizedBox(height: 20),
+                _CompanionArea(
+                  character: companion,
+                  greeting: _showGreeting ? _greetings[_greetingIndex] : null,
+                  onTap: () {
+                    setState(() {
+                      _greetingIndex = (_greetingIndex + 1) % _greetings.length;
+                      _showGreeting = true;
+                    });
+                  },
+                ),
+                const SizedBox(height: 24),
+                _ConnectButton(status: coreStatus, onTap: _toggleCore),
+                const SizedBox(height: 24),
+                _TrafficCard(account: account, onLoginTap: _openLogin),
+                const SizedBox(height: 20),
+                _QuickEntries(
+                  onProxies: () => ref
+                      .read(currentPageLabelProvider.notifier)
+                      .toPage(PageLabel.proxies),
+                  onGames: () =>
+                      BaseNavigator.push(context, const VanqGameCenterView()),
+                  onPlans: () =>
+                      BaseNavigator.push(context, const VanqPlansView()),
+                  onGacha: () =>
+                      BaseNavigator.push(context, const VanqGachaView()),
+                ),
+                const SizedBox(height: 20),
+                const _CurrentNodeBar(),
+              ],
             ),
-            const SizedBox(height: 24),
-            _ConnectButton(status: coreStatus, onTap: _toggleCore),
-            const SizedBox(height: 24),
-            _TrafficCard(account: account, onLoginTap: _openLogin),
-            const SizedBox(height: 20),
-            _QuickEntries(
-              onProxies: () => ref
-                  .read(currentPageLabelProvider.notifier)
-                  .toPage(PageLabel.proxies),
-              onGames: () =>
-                  BaseNavigator.push(context, const VanqGameCenterView()),
-              onPlans: () => BaseNavigator.push(context, const VanqPlansView()),
-              onGacha: () => context.showSnackBar('抽卡二期开放，敬请期待'),
-            ),
-            const SizedBox(height: 20),
-            const _CurrentNodeBar(),
           ],
         ),
       ),
@@ -141,10 +174,15 @@ class _TopBar extends StatelessWidget {
 }
 
 class _CompanionArea extends StatelessWidget {
+  final VanqCharacter character;
   final String? greeting;
   final VoidCallback onTap;
 
-  const _CompanionArea({required this.greeting, required this.onTap});
+  const _CompanionArea({
+    required this.character,
+    required this.greeting,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -152,28 +190,38 @@ class _CompanionArea extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 220,
+        clipBehavior: Clip.antiAlias,
         decoration: ShapeDecoration(
           gradient: VanqTheme.companionPlaceholder,
           shape: AppShape.all(AppCorner.lg),
         ),
         child: Stack(
           children: [
-            const Center(
-              child: Text(
-                'V',
-                style: TextStyle(
-                  fontSize: 96,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0x33FFFFFF),
+            Positioned.fill(
+              child: Image.asset(
+                character.portraitAsset,
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => const Center(
+                  child: Text(
+                    'V',
+                    style: TextStyle(
+                      fontSize: 96,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0x33FFFFFF),
+                    ),
+                  ),
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: 16,
               bottom: 14,
               child: Text(
-                '星野紫音 · 看板娘',
-                style: TextStyle(fontSize: 13, color: VanqTheme.textSecondary),
+                '${character.name} · 看板娘',
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: VanqTheme.textSecondary,
+                ),
               ),
             ),
             if (greeting != null)

@@ -1790,7 +1790,7 @@ final class VanqGameProvider
   VanqGame create() => VanqGame();
 }
 
-String _$vanqGameHash() => r'647ff8e3f4b9598be3151804e17a047334740c54';
+String _$vanqGameHash() => r'377e24d7f2b6781914582a3a992a97c59cad30a9';
 
 abstract class _$VanqGame extends $AsyncNotifier<VanqGameData> {
   FutureOr<VanqGameData> build();
@@ -1803,6 +1803,95 @@ abstract class _$VanqGame extends $AsyncNotifier<VanqGameData> {
             as $ClassProviderElement<
               AnyNotifier<AsyncValue<VanqGameData>, VanqGameData>,
               AsyncValue<VanqGameData>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(VanqCompanion)
+final vanqCompanionProvider = VanqCompanionProvider._();
+
+final class VanqCompanionProvider
+    extends $AsyncNotifierProvider<VanqCompanion, VanqCompanionData> {
+  VanqCompanionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'vanqCompanionProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$vanqCompanionHash();
+
+  @$internal
+  @override
+  VanqCompanion create() => VanqCompanion();
+}
+
+String _$vanqCompanionHash() => r'2181b712288bb4e788a4c3d06a142b9de84bc806';
+
+abstract class _$VanqCompanion extends $AsyncNotifier<VanqCompanionData> {
+  FutureOr<VanqCompanionData> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref =
+        this.ref as $Ref<AsyncValue<VanqCompanionData>, VanqCompanionData>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<VanqCompanionData>, VanqCompanionData>,
+              AsyncValue<VanqCompanionData>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(VanqBackground)
+final vanqBackgroundProvider = VanqBackgroundProvider._();
+
+final class VanqBackgroundProvider
+    extends $AsyncNotifierProvider<VanqBackground, String> {
+  VanqBackgroundProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'vanqBackgroundProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$vanqBackgroundHash();
+
+  @$internal
+  @override
+  VanqBackground create() => VanqBackground();
+}
+
+String _$vanqBackgroundHash() => r'373e2dd3231f20b52ac83d55972eeea201a4bc96';
+
+abstract class _$VanqBackground extends $AsyncNotifier<String> {
+  FutureOr<String> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<String>, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<String>, String>,
+              AsyncValue<String>,
               Object?,
               Object?
             >;

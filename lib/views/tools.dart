@@ -9,6 +9,7 @@ import 'package:fl_clash/views/access.dart';
 import 'package:fl_clash/views/backup_and_restore.dart';
 import 'package:fl_clash/views/config/general.dart';
 import 'package:fl_clash/views/hotkey.dart';
+import 'package:fl_clash/views/vanq_companion.dart';
 import 'package:fl_clash/views/vanq_game_center.dart';
 import 'package:fl_clash/views/vanq_plans.dart';
 import 'package:fl_clash/widgets/widgets.dart';
@@ -62,6 +63,16 @@ class _ToolViewState extends ConsumerState<ToolsView> {
           leading: const Text('💎', style: TextStyle(fontSize: 24)),
           title: const Text('套餐购买'),
           widget: const VanqPlansView(),
+        ),
+        ListItem.open(
+          leading: const Text('💖', style: TextStyle(fontSize: 24)),
+          title: const Text('伴侣舱'),
+          widget: const VanqCompanionView(),
+        ),
+        ListItem.open(
+          leading: const Text('🖼️', style: TextStyle(fontSize: 24)),
+          title: const Text('背景主题'),
+          widget: const VanqBackgroundView(),
         ),
       ],
     );

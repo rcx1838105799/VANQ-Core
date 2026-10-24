@@ -28,3 +28,5 @@ part 'state/custom.dart';
 part 'state/custom_import.dart';
 part 'state/vanq.dart';
 part 'state/vanq_game.dart';
+part 'state/vanq_companion.dart';
+part 'state/vanq_background.dart';
